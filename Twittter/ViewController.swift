@@ -94,6 +94,19 @@ world right now.
         passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
         passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
         
+        //password visibility button
+        toggleVisibilityButton.setImage(UIImage(systemName: "eye"), for: .normal)
+        toggleVisibilityButton.setImage(UIImage(systemName: "eye.slash"), for: .selected)
+        toggleVisibilityButton.tintColor = UIColor.lightGray
+        toggleVisibilityButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+
+        passwordTextField.rightView = toggleVisibilityButton
+        passwordTextField.rightViewMode = .always
+    }
+    
+    @objc func togglePasswordVisibility() {
+        passwordTextField.isSecureTextEntry.toggle()
+        toggleVisibilityButton.isSelected.toggle()
         
     }
     
