@@ -15,7 +15,10 @@ class ViewController: UIViewController {
     let signIn = UILabel()
     let loginTextField = UITextField()
     let passwordTextField = UITextField()
+    var password: String?
     let toggleVisibilityButton = UIButton(type: .custom)
+    
+    let signInButton = UIButton(type: .custom)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +27,9 @@ class ViewController: UIViewController {
         setLogo()
         setWelcomeText()
         setSignIn()
+        createConfirmButton()
     }
-
+    
     func setLogo() {
         logo.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logo)
@@ -45,7 +49,7 @@ class ViewController: UIViewController {
         view.addSubview(welcomeText)
         
         welcomeText.text = """
-See what's 
+See what's
 happening in the
 world right now.
 """
@@ -86,7 +90,7 @@ world right now.
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(passwordTextField)
         
-        passwordTextField.placeholder = "Enter your password"
+        passwordTextField.placeholder = "Enter your password"        
         passwordTextField.isSecureTextEntry = true
         passwordTextField.borderStyle = .roundedRect
         
@@ -99,7 +103,7 @@ world right now.
         toggleVisibilityButton.setImage(UIImage(systemName: "eye.slash"), for: .selected)
         toggleVisibilityButton.tintColor = UIColor.lightGray
         toggleVisibilityButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
-
+        
         passwordTextField.rightView = toggleVisibilityButton
         passwordTextField.rightViewMode = .always
     }
@@ -111,15 +115,34 @@ world right now.
     }
     
     func createConfirmButton() {
-        let signInButton = UIButton()
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(signInButton)
         
-        signInButton.titleLabel?.text = "Sign in"
-        signInButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .regular)
-        signInButton.backgroundColor = UIColor.systemIndigo
+        signInButton.setTitle("Sign in", for: .normal)
+        signInButton.setTitleColor(.black, for: .normal)
+        signInButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .regular)
+        signInButton.backgroundColor = UIColor(named: "mainColor")
+        signInButton.layer.cornerRadius = 15
         
+        signInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
+        signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
+        signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
+        signInButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
+
+        signInButton.addTarget(self, action: #selector(signInAction), for: .touchUpInside)
     }
+    
+    @objc func signInAction() {
+        guard let password = passwordTextField.text, !password.isEmpty,
+              let login = loginTextField.text, !login.isEmpty else {
+            // Вывод сообщения об ошибке
+            return
+        }
+        print(password)
+        print(login)
+    
+    }
+
 }
 
 
