@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     let toggleVisibilityButton = UIButton(type: .custom)
     
     let signInButton = UIButton(type: .custom)
+    let question = UILabel()
+    let signUpButton = UIButton(type: .custom)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,7 @@ class ViewController: UIViewController {
         setWelcomeText()
         setSignIn()
         createConfirmButton()
+        createSignUpButton()
     }
     
     func setLogo() {
@@ -119,12 +122,12 @@ world right now.
         view.addSubview(signInButton)
         
         signInButton.setTitle("Sign in", for: .normal)
-        signInButton.setTitleColor(.black, for: .normal)
+        signInButton.setTitleColor(.white, for: .normal)
         signInButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .regular)
         signInButton.backgroundColor = UIColor(named: "mainColor")
         signInButton.layer.cornerRadius = 15
         
-        signInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
+        signInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 15).isActive = true
         signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
         signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
         signInButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
@@ -140,9 +143,37 @@ world right now.
         }
         print(password)
         print(login)
-    
     }
-
+    
+    func createSignUpButton() {
+        signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        question.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(signUpButton)
+        view.addSubview(question)
+        
+        question.text = "Don't have an account?"
+        question.font = .systemFont(ofSize: 15, weight: .regular)
+        question.textColor = UIColor.lightGray
+        
+        question.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 10).isActive = true
+        question.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
+        question.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
+        
+        signUpButton.setTitle("Sign Up", for: .normal)
+        signUpButton.setTitleColor(UIColor(named: "mainColor"), for: .normal)
+        signUpButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .regular)
+        signUpButton.trailingAnchor.constraint(equalTo: question.trailingAnchor).isActive = true
+        signUpButton.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 5).isActive = true
+        
+        signUpButton.addTarget(self, action: #selector(signUpAction), for: .touchUpInside)
+        }
+    
+    @objc func signUpAction() {
+        let registerVC = SignUpVС()
+        registerVC.modalPresentationStyle = .fullScreen
+        present(registerVC, animated: true, completion: nil)
+        print("Push")
+    }
 }
 
 

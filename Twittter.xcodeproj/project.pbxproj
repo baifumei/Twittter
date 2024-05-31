@@ -13,6 +13,7 @@
 		E103E5A22C05BD530012452D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = E103E5A12C05BD530012452D /* Base */; };
 		E103E5A42C05BD550012452D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E103E5A32C05BD550012452D /* Assets.xcassets */; };
 		E103E5A72C05BD550012452D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = E103E5A62C05BD550012452D /* Base */; };
+		E1472F1D2C09924100814642 /* SignUpVС.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1472F1C2C09924100814642 /* SignUpVС.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		E103E5A32C05BD550012452D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E103E5A62C05BD550012452D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E103E5A82C05BD550012452D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1472F1C2C09924100814642 /* SignUpVС.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpVС.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				E103E59A2C05BD530012452D /* AppDelegate.swift */,
 				E103E59C2C05BD530012452D /* SceneDelegate.swift */,
 				E103E59E2C05BD530012452D /* ViewController.swift */,
+				E1472F1C2C09924100814642 /* SignUpVС.swift */,
 				E103E5A02C05BD530012452D /* Main.storyboard */,
 				E103E5A32C05BD550012452D /* Assets.xcassets */,
 				E103E5A52C05BD550012452D /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 			files = (
 				E103E59F2C05BD530012452D /* ViewController.swift in Sources */,
 				E103E59B2C05BD530012452D /* AppDelegate.swift in Sources */,
+				E1472F1D2C09924100814642 /* SignUpVС.swift in Sources */,
 				E103E59D2C05BD530012452D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
