@@ -93,7 +93,7 @@ world right now.
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(passwordTextField)
         
-        passwordTextField.placeholder = "Enter your password"        
+        passwordTextField.placeholder = "Enter your password"
         passwordTextField.isSecureTextEntry = true
         passwordTextField.borderStyle = .roundedRect
         
@@ -131,19 +131,25 @@ world right now.
         signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
         signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
         signInButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
-
+        
         signInButton.addTarget(self, action: #selector(signInAction), for: .touchUpInside)
     }
     
     @objc func signInAction() {
-        guard let password = passwordTextField.text, !password.isEmpty,
-              let login = loginTextField.text, !login.isEmpty else {
+        if let password = passwordTextField.text, !password.isEmpty,
+           let login = loginTextField.text, !login.isEmpty {
             // Вывод сообщения об ошибке
-            return
+            print(password)
+            print(login)
+        } else {
+            let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+            animation.duration = 0.6
+            animation.values = [-10, 10, -10, 10, -5, 5, -2.5, 2.5, 0]
+            signInButton.layer.add(animation, forKey: "shake")
         }
-        print(password)
-        print(login)
     }
+    
     
     func createSignUpButton() {
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
