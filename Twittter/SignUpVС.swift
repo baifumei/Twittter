@@ -11,6 +11,6 @@ import UIKit
 class SignUpVС: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "mainColor")
+        
     }
 }

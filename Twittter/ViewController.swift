@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = UIColor.white
         // Настройка
         setLogo()
         setWelcomeText()
@@ -177,7 +177,7 @@ world right now.
     @objc func signUpAction() {
         let registerVC = SignUpVС()
         registerVC.modalPresentationStyle = .fullScreen
-        present(registerVC, animated: true, completion: nil)
+        navigationController?.pushViewController(registerVC, animated: true) //add navigation
         print("Push")
     }
 }
