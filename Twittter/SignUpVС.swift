@@ -31,6 +31,7 @@ class SignUpVС: UIViewController {
         
         setLogo()
         setSignUp()
+        createConfirmButton()
     }
     
     func setLogo() {
@@ -43,7 +44,7 @@ class SignUpVС: UIViewController {
         
         logo.widthAnchor.constraint(equalToConstant: 35).isActive = true
         logo.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         logo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
@@ -55,7 +56,7 @@ class SignUpVС: UIViewController {
         signUp.font = .systemFont(ofSize: 28, weight: .bold)
         signUp.textAlignment = .center
         
-        signUp.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 80).isActive = true
+        signUp.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 60).isActive = true
         signUp.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
         signUp.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
     
@@ -132,6 +133,46 @@ class SignUpVС: UIViewController {
             textField.isSecureTextEntry.toggle()
             sender.isSelected.toggle()
         }
-        
     }
+    
+    //confirmation button
+    func createConfirmButton() {
+        signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(signUpButton)
+        
+        signUpButton.setTitle("Create an account", for: .normal)
+        signUpButton.setTitleColor(.white, for: .normal)
+        signUpButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .regular)
+        signUpButton.backgroundColor = UIColor(named: "mainColor")
+        signUpButton.layer.cornerRadius = 15
+        
+        signUpButton.topAnchor.constraint(equalTo: passwordTextField2.bottomAnchor, constant: 15).isActive = true
+        signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
+        signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
+        signUpButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
+        
+        signUpButton.addTarget(self, action: #selector(signUpAction), for: .touchUpInside)
+    }
+    
+    @objc func signUpAction() {
+        guard let email = emailTextField.text, !email.isEmpty, let login = loginTextField.text, !login.isEmpty else { return }
+        
+        
+        if let password1 = passwordTextField1.text, !password1.isEmpty,
+           let password2 = passwordTextField2.text, !password2.isEmpty,
+            password1 == password2 {
+            print("create an account")
+        } else {
+            let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+            animation.duration = 0.6
+            animation.values = [-10, 10, -10, 10, -5, 5, -2.5, 2.5, 0]
+            signUpButton.layer.add(animation, forKey: "shake2")
+        }
+    }
+    
+    //Another way to sign up
+    
+    
+    //By signing up, you agree to the Terms of Service and Privacy Policy, including Cookie Use.
 }

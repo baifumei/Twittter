@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         
         logo.widthAnchor.constraint(equalToConstant: 35).isActive = true
         logo.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -10).isActive = true
         logo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
@@ -74,7 +74,7 @@ world right now.
         signIn.font = .systemFont(ofSize: 28, weight: .bold)
         signIn.textAlignment = .center
         
-        signIn.topAnchor.constraint(equalTo: welcomeText.bottomAnchor, constant: 80).isActive = true
+        signIn.topAnchor.constraint(equalTo: welcomeText.bottomAnchor, constant: 60).isActive = true
         signIn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
         signIn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
         
