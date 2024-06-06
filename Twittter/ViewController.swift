@@ -30,6 +30,8 @@ class ViewController: UIViewController {
     let googleButton = UIButton()
     let appleButton = UIButton()
     
+    let terms = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -42,6 +44,7 @@ class ViewController: UIViewController {
         addHorizontalDivider()
         createGoogleSignInButton()
         createAppleSignInButton()
+        addTerms()
     }
     
     func setLogo() {
@@ -203,7 +206,7 @@ world right now.
         signInWith.textColor = .black
         signInWith.font = .systemFont(ofSize: 15, weight: .light)
         
-        signInWith.topAnchor.constraint(equalTo: question.bottomAnchor, constant: 60).isActive = true
+        signInWith.topAnchor.constraint(equalTo: question.bottomAnchor, constant: 80).isActive = true
         signInWith.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         divider1.translatesAutoresizingMaskIntoConstraints = false
@@ -214,8 +217,7 @@ world right now.
         divider1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         divider1.trailingAnchor.constraint(equalTo: signInWith.leadingAnchor, constant: -5).isActive = true
         divider1.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        divider1.topAnchor.constraint(equalTo: question.bottomAnchor, constant: 70).isActive = true
-        
+        divider1.topAnchor.constraint(equalTo: question.bottomAnchor, constant: 90).isActive = true
         
         
         divider2.translatesAutoresizingMaskIntoConstraints = false
@@ -226,7 +228,7 @@ world right now.
         divider2.leadingAnchor.constraint(equalTo: signInWith.trailingAnchor, constant: 5).isActive = true
         divider2.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         divider2.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        divider2.topAnchor.constraint(equalTo: question.bottomAnchor, constant: 70).isActive = true
+        divider2.topAnchor.constraint(equalTo: question.bottomAnchor, constant: 90).isActive = true
     }
     
     //Another way to sign in
@@ -263,6 +265,25 @@ world right now.
         appleButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         appleButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         appleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.width / 2 + 50).isActive = true
+    }
+    
+    func addTerms() {
+        terms.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(terms)
+        
+        terms.text = """
+By signing in, you agree to the Terms of Service and
+Privacy Policy, including Cookie Use.
+"""
+        terms.numberOfLines = 2
+        terms.textAlignment = .left
+        terms.font = .systemFont(ofSize: 15, weight: .medium)
+        terms.textColor = .lightGray
+        
+        terms.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -80).isActive = true
+        terms.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+        
+        //need add url
     }
 }
 
