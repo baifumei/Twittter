@@ -23,7 +23,8 @@ class ViewController: UIViewController {
     let question = UILabel()
     let signUpButton = UIButton(type: .custom)
     
-    let divider = UIView()
+    let divider1 = UIView()
+    let divider2 = UIView()
     
     let signInWith = UILabel()
     let googleButton = UIButton()
@@ -194,16 +195,7 @@ world right now.
     
     //Add horizontal divider
     func addHorizontalDivider() {
-        divider.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(divider)
-        
-        divider.backgroundColor = .lightGray
-        
-        divider.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        divider.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        divider.topAnchor.constraint(equalTo: question.bottomAnchor, constant: 60).isActive = true
-        
+        //Enter with
         signInWith.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(signInWith)
         
@@ -211,8 +203,30 @@ world right now.
         signInWith.textColor = .black
         signInWith.font = .systemFont(ofSize: 15, weight: .light)
         
-        signInWith.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 5).isActive = true
+        signInWith.topAnchor.constraint(equalTo: question.bottomAnchor, constant: 60).isActive = true
         signInWith.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        divider1.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(divider1)
+        
+        divider1.backgroundColor = .lightGray
+        
+        divider1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        divider1.trailingAnchor.constraint(equalTo: signInWith.leadingAnchor, constant: -5).isActive = true
+        divider1.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider1.topAnchor.constraint(equalTo: question.bottomAnchor, constant: 70).isActive = true
+        
+        
+        
+        divider2.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(divider2)
+        
+        divider2.backgroundColor = .lightGray
+        
+        divider2.leadingAnchor.constraint(equalTo: signInWith.trailingAnchor, constant: 5).isActive = true
+        divider2.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        divider2.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider2.topAnchor.constraint(equalTo: question.bottomAnchor, constant: 70).isActive = true
     }
     
     //Another way to sign in
@@ -227,7 +241,7 @@ world right now.
         googleButton.backgroundColor = UIColor.white
         googleButton.clipsToBounds = true
         
-        googleButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 30).isActive = true
+        googleButton.topAnchor.constraint(equalTo: signInWith.bottomAnchor, constant: 15).isActive = true
         googleButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         googleButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         googleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width / 2 - 50).isActive = true
@@ -245,7 +259,7 @@ world right now.
         appleButton.backgroundColor = UIColor.white
         appleButton.clipsToBounds = true
         
-        appleButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 30).isActive = true
+        appleButton.topAnchor.constraint(equalTo: signInWith.bottomAnchor, constant: 13).isActive = true
         appleButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         appleButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         appleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.width / 2 + 50).isActive = true
