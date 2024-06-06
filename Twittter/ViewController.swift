@@ -19,8 +19,15 @@ class ViewController: UIViewController {
     let toggleVisibilityButton = UIButton(type: .custom)
     
     let signInButton = UIButton(type: .custom)
+    
     let question = UILabel()
     let signUpButton = UIButton(type: .custom)
+    
+    let divider = UIView()
+    
+    let signInWith = UILabel()
+    let googleButton = UIButton()
+    let appleButton = UIButton(type: .custom)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +38,8 @@ class ViewController: UIViewController {
         setSignIn()
         createConfirmButton()
         createSignUpButton()
+        addHorizontalDivider()
+        createGoogleSignInButton()
     }
     
     func setLogo() {
@@ -179,6 +188,54 @@ world right now.
         registerVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(registerVC, animated: true) //add navigation
         print("Push")
+    }
+    
+    
+    //Add horizontal divider
+    func addHorizontalDivider() {
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(divider)
+        
+        divider.backgroundColor = .lightGray
+        
+        divider.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        divider.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.topAnchor.constraint(equalTo: question.bottomAnchor, constant: 60).isActive = true
+        
+        signInWith.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(signInWith)
+        
+        signInWith.text = "Enter with:"
+        signInWith.textColor = .black
+        signInWith.font = .systemFont(ofSize: 15, weight: .light)
+        
+        signInWith.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 5).isActive = true
+        signInWith.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    //Another way to sign in
+    func createGoogleSignInButton() {
+        googleButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(googleButton)
+        
+        googleButton.setImage(UIImage(named: "googleLogo"), for: .normal)
+        googleButton.imageView?.contentMode = .scaleAspectFit
+                
+        googleButton.layer.cornerRadius = 20
+        googleButton.backgroundColor = UIColor.white
+//        googleButton.layer.borderColor = UIColor.lightGray.cgColor
+//        googleButton.layer.borderWidth = 1
+        googleButton.clipsToBounds = true
+        
+        googleButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 30).isActive = true
+        googleButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        googleButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        googleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width / 2 - 60).isActive = true
+    }
+    
+    func createAppleSignInButton() {
+        
     }
 }
 
