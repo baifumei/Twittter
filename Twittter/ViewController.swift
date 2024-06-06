@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     
     let signInWith = UILabel()
     let googleButton = UIButton()
-    let appleButton = UIButton(type: .custom)
+    let appleButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,7 @@ class ViewController: UIViewController {
         createSignUpButton()
         addHorizontalDivider()
         createGoogleSignInButton()
+        createAppleSignInButton()
     }
     
     func setLogo() {
@@ -224,18 +225,30 @@ world right now.
                 
         googleButton.layer.cornerRadius = 20
         googleButton.backgroundColor = UIColor.white
-//        googleButton.layer.borderColor = UIColor.lightGray.cgColor
-//        googleButton.layer.borderWidth = 1
         googleButton.clipsToBounds = true
         
         googleButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 30).isActive = true
         googleButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         googleButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        googleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width / 2 - 60).isActive = true
+        googleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width / 2 - 50).isActive = true
     }
     
     func createAppleSignInButton() {
+        appleButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(appleButton)
         
+        appleButton.setImage(UIImage(named: "appleLogo"), for: .normal)
+        appleButton.imageView?.contentMode = .scaleAspectFit
+        appleButton.backgroundColor = .blue
+                
+        appleButton.layer.cornerRadius = 20
+        appleButton.backgroundColor = UIColor.white
+        appleButton.clipsToBounds = true
+        
+        appleButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 30).isActive = true
+        appleButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        appleButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        appleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.width / 2 + 50).isActive = true
     }
 }
 
