@@ -247,6 +247,8 @@ world right now.
         googleButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         googleButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         googleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width / 2 - 50).isActive = true
+        
+        //add target
     }
     
     func createAppleSignInButton() {
@@ -265,6 +267,8 @@ world right now.
         appleButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         appleButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         appleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.width / 2 + 50).isActive = true
+        
+        //add target
     }
     
     func addTerms() {
