@@ -32,6 +32,8 @@ class ViewController: UIViewController {
     
     let terms = UILabel()
     
+    let credentials: Credentials? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -71,7 +73,7 @@ happening in the
 world right now.
 """
         welcomeText.numberOfLines = 3
-        welcomeText.font = .systemFont(ofSize: 30, weight: .heavy)
+        welcomeText.font = .systemFont(ofSize: 28, weight: .heavy)
         welcomeText.textAlignment = .left
         
         welcomeText.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 60).isActive = true
@@ -189,7 +191,7 @@ world right now.
         }
     
     @objc func signUpAction() {
-        let registerVC = SignUpVС()
+        let registerVC = SignUpVC()
         registerVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(registerVC, animated: true) //add navigation
         print("Push")

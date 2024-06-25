@@ -7,8 +7,7 @@
 
 import UIKit
 
-
-class SignUpVС: UIViewController {
+class SignUpVC: UIViewController, UITextFieldDelegate {
     let logo = UIImageView()
     
     let welcomeText = UILabel()
@@ -16,10 +15,9 @@ class SignUpVС: UIViewController {
     let signUp = UILabel()
     let loginTextField = UITextField()
     let emailTextField = UITextField()
+    let validDomains = ["@icloud.com", "@gmail.com", "@mail.ru"]
     let passwordTextField1 = UITextField()
-    var password1: String?
     let passwordTextField2 = UITextField()
-    var password2: String?
     
     let signUpButton = UIButton(type: .custom)
     
@@ -70,7 +68,7 @@ happening in the
 world right now.
 """
         welcomeText.numberOfLines = 3
-        welcomeText.font = .systemFont(ofSize: 30, weight: .heavy)
+        welcomeText.font = .systemFont(ofSize: 28, weight: .heavy)
         welcomeText.textAlignment = .left
         
         welcomeText.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 60).isActive = true
@@ -107,6 +105,7 @@ world right now.
         
         emailTextField.placeholder = "Enter your email"
         emailTextField.borderStyle = .roundedRect
+        emailTextField.delegate = self // Устанавливаем делегат
         
         emailTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 15).isActive = true
         emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
@@ -125,7 +124,7 @@ world right now.
         passwordTextField1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
         passwordTextField1.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
         
-        //Re enter password
+        //Re-enter password
         passwordTextField2.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(passwordTextField2)
         
@@ -190,7 +189,7 @@ world right now.
         
         if let password1 = passwordTextField1.text, !password1.isEmpty,
            let password2 = passwordTextField2.text, !password2.isEmpty,
-            password1 == password2 {
+           password1 == password2 {
             print("create an account")
         } else {
             let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
@@ -293,5 +292,43 @@ Privacy Policy, including Cookie Use.
         terms.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
         
         //need add url
+    }
+    
+    // Метод делегата для проверки ввода
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        
+        // Обновляем текст с новым символом
+        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        // Проверка на валидность
+        if isValidEmail(updatedText) {
+            textField.textColor = .black
+            textField.backgroundColor = .white
+        } else {
+            textField.textColor = .black
+            textField.backgroundColor = .red.withAlphaComponent(0.07)
+        }
+        
+        return true
+    }
+    
+    // Метод для проверки валидности email
+    func isValidEmail(_ email: String) -> Bool {
+        // Регулярное выражение для проверки базовой структуры email
+        let emailRegEx = "^[A-Z0-9a-z._%+-]+@[A-Z0-9a-z.-]+\\.[A-Za-z]{2,}$"
+        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        
+        guard emailTest.evaluate(with: email) else {
+            return false
+        }
+        
+        for domain in validDomains {
+            if email.lowercased().hasSuffix(domain) {
+                return true
+            }
+        }
+        
+        return false
     }
 }
