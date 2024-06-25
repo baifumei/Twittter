@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
     let logo = UIImageView()
     
     let welcomeText = UILabel()
@@ -32,7 +32,9 @@ class ViewController: UIViewController {
     
     let terms = UILabel()
     
-    let credentials: Credentials? = nil
+    //временно
+    let log = "Qwerty"
+    let pass = "1234"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,9 +156,18 @@ world right now.
     @objc func signInAction() {
         if let password = passwordTextField.text, !password.isEmpty,
            let login = loginTextField.text, !login.isEmpty {
-            // Вывод сообщения об ошибке
-            print(password)
-            print(login)
+            if password == pass && login == log {
+                if let sceneDelegate = UIApplication.shared.connectedScenes
+                    .first?.delegate as? SceneDelegate {
+                    sceneDelegate.switchToMainInterface()
+                } else {
+                    print(password)
+                    print(login)
+                }
+            } else {
+                print(password)
+                print(login)
+            }
         } else {
             let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
             animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
@@ -188,7 +199,7 @@ world right now.
         signUpButton.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 5).isActive = true
         
         signUpButton.addTarget(self, action: #selector(signUpAction), for: .touchUpInside)
-        }
+    }
     
     @objc func signUpAction() {
         let registerVC = SignUpVC()
@@ -240,7 +251,7 @@ world right now.
         
         googleButton.setImage(UIImage(named: "googleLogo"), for: .normal)
         googleButton.imageView?.contentMode = .scaleAspectFit
-                
+        
         googleButton.layer.cornerRadius = 20
         googleButton.backgroundColor = UIColor.white
         googleButton.clipsToBounds = true
@@ -260,7 +271,7 @@ world right now.
         appleButton.setImage(UIImage(named: "appleLogo"), for: .normal)
         appleButton.imageView?.contentMode = .scaleAspectFit
         appleButton.backgroundColor = .blue
-                
+        
         appleButton.layer.cornerRadius = 20
         appleButton.backgroundColor = UIColor.white
         appleButton.clipsToBounds = true
