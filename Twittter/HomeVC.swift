@@ -12,12 +12,15 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let logo = UIImageView()
     var tableView: UITableView!
     
+    var tweetButton = UIButton(type: .custom)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
         setLogo()
         createTwitBoard()
+        createTweet()
     }
     
     func setLogo() {
@@ -63,5 +66,30 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "Tweet: \(indexPath.row)"
         return cell
+    }
+    
+    func createTweet() {
+        tweetButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tweetButton)
+        
+        tweetButton.setImage(UIImage(named: "tweet"), for: .normal)
+        tweetButton.imageView?.contentMode = .scaleAspectFit
+        tweetButton.backgroundColor = .white
+        
+        
+        tweetButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        tweetButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        tweetButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15).isActive = true
+        tweetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        
+        tweetButton.addTarget(self, action: #selector(toggleTweet), for: .touchUpInside)
+    }
+    
+    @objc func toggleTweet() {
+        let tweetVC = TweetVC()
+        let navigationController = UINavigationController(rootViewController: tweetVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
+        print("tapped")
     }
 }
