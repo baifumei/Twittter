@@ -11,14 +11,16 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let logo = UIImageView()
     var tableView: UITableView!
-    
+    let menuButton = UIButton()
+
     var tweetButton = UIButton(type: .custom)
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
         setLogo()
+        setupMenuButton()
         createTwitBoard()
         createTweet()
     }
@@ -37,10 +39,31 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         logo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
-    func upperBar() {
+    func setupMenuButton() {
+        view.addSubview(menuButton)
+        menuButton.translatesAutoresizingMaskIntoConstraints = false
+        menuButton.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
+        menuButton.layer.cornerRadius = 17.5
+        if let image = UIImage(named: "defaultImage") {
+            menuButton.setImage(image, for: .normal)
+            menuButton.imageView?.contentMode = .scaleAspectFill
+        }
+        menuButton.clipsToBounds = true
+        menuButton.addTarget(self, action: #selector(openMenu), for: .touchUpInside)
         
+        NSLayoutConstraint.activate([
+            menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            menuButton.centerYAnchor.constraint(equalTo: logo.centerYAnchor),
+            menuButton.widthAnchor.constraint(equalToConstant: 35),
+            menuButton.heightAnchor.constraint(equalToConstant: 35)
+        ])
     }
    
+    @objc func openMenu() {
+        //go to menu settings
+        print("open menu")
+    }
+    
     func createTwitBoard() {
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
