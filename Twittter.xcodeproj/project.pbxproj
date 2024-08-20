@@ -19,6 +19,7 @@
 		E1529A042C2A562C00534494 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1529A032C2A562C00534494 /* SearchVC.swift */; };
 		E1529A062C2A565700534494 /* NotificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1529A052C2A565700534494 /* NotificationsVC.swift */; };
 		E1529A082C33E5A600534494 /* TweetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1529A072C33E5A600534494 /* TweetVC.swift */; };
+		E1529A0A2C71983100534494 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1529A092C71983100534494 /* MenuVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		E1529A032C2A562C00534494 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		E1529A052C2A565700534494 /* NotificationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsVC.swift; sourceTree = "<group>"; };
 		E1529A072C33E5A600534494 /* TweetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetVC.swift; sourceTree = "<group>"; };
+		E1529A092C71983100534494 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				E103E59E2C05BD530012452D /* LoginViewController.swift */,
 				E1472F1C2C09924100814642 /* SignUpVС.swift */,
 				E15299FF2C2A551200534494 /* HomeVC.swift */,
+				E1529A092C71983100534494 /* MenuVC.swift */,
 				E1529A072C33E5A600534494 /* TweetVC.swift */,
 				E1529A032C2A562C00534494 /* SearchVC.swift */,
 				E1529A052C2A565700534494 /* NotificationsVC.swift */,
@@ -165,6 +168,7 @@
 				E1472F1D2C09924100814642 /* SignUpVС.swift in Sources */,
 				E103E59D2C05BD530012452D /* SceneDelegate.swift in Sources */,
 				E1529A042C2A562C00534494 /* SearchVC.swift in Sources */,
+				E1529A0A2C71983100534494 /* MenuVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

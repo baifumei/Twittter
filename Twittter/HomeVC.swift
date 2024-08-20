@@ -10,10 +10,21 @@ import UIKit
 class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let logo = UIImageView()
+    var logoCenterXConstraint: NSLayoutConstraint?
+    
     var tableView: UITableView!
     let menuButton = UIButton()
-
+    var avatarWidthAnchorConstraint: NSLayoutConstraint?
+    var avatarHeightAnchorConstraint: NSLayoutConstraint?
+    
     var tweetButton = UIButton(type: .custom)
+    var tweetButtonTrailingAnchorConstraint: NSLayoutConstraint?
+    
+    var isMenuOpen = false
+    let menuViewController = MenuViewController()
+    var menuWidth: CGFloat {
+        return view.frame.width * 0.75
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +47,16 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         logo.widthAnchor.constraint(equalToConstant: 35).isActive = true
         logo.heightAnchor.constraint(equalToConstant: 25).isActive = true
         logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        logo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        logoCenterXConstraint = logo.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        logoCenterXConstraint?.isActive = true
+    }
+    
+    func setupMenu() {
+        addChild(menuViewController)
+        menuViewController.view.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: view.frame.height)
+        view.addSubview(menuViewController.view)
+        menuViewController.didMove(toParent: self)
     }
     
     func setupMenuButton() {
@@ -51,17 +71,33 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         menuButton.clipsToBounds = true
         menuButton.addTarget(self, action: #selector(openMenu), for: .touchUpInside)
         
-        NSLayoutConstraint.activate([
-            menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            menuButton.centerYAnchor.constraint(equalTo: logo.centerYAnchor),
-            menuButton.widthAnchor.constraint(equalToConstant: 35),
-            menuButton.heightAnchor.constraint(equalToConstant: 35)
-        ])
+        menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+        menuButton.centerYAnchor.constraint(equalTo: logo.centerYAnchor).isActive = true
+        avatarWidthAnchorConstraint = menuButton.widthAnchor.constraint(equalToConstant: 35)
+        avatarWidthAnchorConstraint?.isActive = true
+        avatarHeightAnchorConstraint = menuButton.heightAnchor.constraint(equalToConstant: 35)
+        avatarHeightAnchorConstraint?.isActive = true
+        
     }
    
     @objc func openMenu() {
         //go to menu settings
-        print("open menu")
+        
+        isMenuOpen.toggle()
+        print(isMenuOpen.description)
+        
+        let targetPosition = isMenuOpen ? menuWidth : 0
+        let size: CGFloat = 55
+        logoCenterXConstraint?.constant = isMenuOpen ? targetPosition : 0
+        tweetButtonTrailingAnchorConstraint?.constant = isMenuOpen ? targetPosition : -20
+        avatarHeightAnchorConstraint?.constant = isMenuOpen ? size : 35
+        avatarWidthAnchorConstraint?.constant = isMenuOpen ? size : 35
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+            self.tableView.frame.origin.x = targetPosition
+            self.menuViewController.view.frame.origin.x = self.isMenuOpen ? 0 : -self.menuWidth
+        }
     }
     
     func createTwitBoard() {
@@ -103,7 +139,8 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tweetButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
         tweetButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         tweetButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15).isActive = true
-        tweetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        tweetButtonTrailingAnchorConstraint = tweetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        tweetButtonTrailingAnchorConstraint?.isActive = true
         
         tweetButton.addTarget(self, action: #selector(toggleTweet), for: .touchUpInside)
     }
