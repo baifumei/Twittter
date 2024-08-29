@@ -12,6 +12,8 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let logo = UIImageView()
     var logoCenterXConstraint: NSLayoutConstraint?
     
+    let divider = UIView()
+    
     var tableView: UITableView!
     let menuButton = UIButton()
     var avatarWidthAnchorConstraint: NSLayoutConstraint?
@@ -32,6 +34,8 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         setLogo()
         setupMenuButton()
+        setupMenu()
+        addHorizontalDivider()
         createTwitBoard()
         createTweet()
     }
@@ -64,7 +68,7 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         menuButton.translatesAutoresizingMaskIntoConstraints = false
         menuButton.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
         menuButton.layer.cornerRadius = 17.5
-        if let image = UIImage(named: "defaultImage") {
+        if let image = UIImage(named: "me") {
             menuButton.setImage(image, for: .normal)
             menuButton.imageView?.contentMode = .scaleAspectFill
         }
@@ -84,21 +88,40 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         //go to menu settings
         
         isMenuOpen.toggle()
-        print(isMenuOpen.description)
+        print("Menu button is open? - " + isMenuOpen.description)
         
         let targetPosition = isMenuOpen ? menuWidth : 0
-        let size: CGFloat = 55
+        let size: CGFloat = 0
         logoCenterXConstraint?.constant = isMenuOpen ? targetPosition : 0
         tweetButtonTrailingAnchorConstraint?.constant = isMenuOpen ? targetPosition : -20
         avatarHeightAnchorConstraint?.constant = isMenuOpen ? size : 35
         avatarWidthAnchorConstraint?.constant = isMenuOpen ? size : 35
         
         UIView.animate(withDuration: 0.3) {
+            let lighterGrayColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
+            self.view.backgroundColor = lighterGrayColor
+            self.tableView.backgroundColor = lighterGrayColor
+            
             self.view.layoutIfNeeded()
+            
             self.tableView.frame.origin.x = targetPosition
             self.menuViewController.view.frame.origin.x = self.isMenuOpen ? 0 : -self.menuWidth
+            self.divider.frame.origin.x = targetPosition
         }
     }
+    
+    func addHorizontalDivider() {
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(divider)
+        
+        divider.backgroundColor = .lightGray
+        
+        divider.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 1).isActive = true
+        divider.trailingAnchor.constraint(equalTo:  view.trailingAnchor, constant: -1).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 0.2).isActive = true
+        divider.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 15).isActive = true
+    }
+    
     
     func createTwitBoard() {
         tableView = UITableView()
@@ -110,7 +133,7 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 10),
+            tableView.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 10),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -124,6 +147,7 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "Tweet: \(indexPath.row)"
+        cell.backgroundColor = .clear
         return cell
     }
     
